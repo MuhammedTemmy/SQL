@@ -1,0 +1,366 @@
+CREATE TABLE Potential_Buyer
+(BuyerNumber       char(8) not null,
+Buyer_Name      char(20) not null,
+Buyer_Address    char(50) not null,
+Min_Bedroom  char,
+Min_Bathroom   char,
+Min_reception   char,
+Family_Type         varchar(12) not null,
+GarageRequired       char(10),
+Max_price            number,
+constraint Potential_Buyer_BuyerNumber_pk primary key(BuyerNumber));
+
+CREATE TABLE Seller
+(SellerNo     char(8) not null,
+Property_Status   char(20),
+constraint Seller_SellerNo_pk primary key(SellerNo));
+
+CREATE TABLE Sale_Property
+(PropertyCode char(10) not null,
+SellerNo      char(8) not null,
+Area                 char(20),
+Address        char(50) not null,
+Bedroom_Number  char,
+Bathroom_Number   char,
+Reception_Number   char,
+Garage_status     varchar(10),
+Property_Type     varchar(25) not null,
+Price             number,
+Property_ownership    char(20),
+Market_Date          date,
+Property_Current_State          char(15),
+constraint Sale_Property_PropertyCode_pk primary key(PropertyCode),
+constraint Sale_Property_SellerNo_fk Foreign key(SellerNo) references Seller(SellerNo));
+
+CREATE TABLE Staff_Member
+(StaffNo    varchar(8) not null,
+Staff_name   char(20) not null,
+Staff_address    varchar(80),
+constraint Staff_Member_StaffNo_pk primary key(StaffNo));
+
+CREATE TABLE Viewing_Appointment
+(AppointmentNo       char(10) not null,
+BuyerNumber        char(8) not null,
+PropertyCode       char(10) not null,
+StaffNo             varchar(8) not null,
+AppointmentDate              date,
+Appointmenttime              char(7) not null,
+constraint Viewing_Appointment_AppointmentNo_pk primary key(StaffNo,BuyerNumber,PropertyCode,AppointmentDate,Appointmenttime),
+constraint Viewing_Appointment_BuyerNumber_fk foreign key(BuyerNumber) references Potential_Buyer(BuyerNumber),
+constraint Viewing_Appointment_PropertyCode_fk foreign key(PropertyCode) references Sale_Property(PropertyCode),
+constraint viewing_Appointment_StaffNo_fk foreign key(StaffNo) references Staff_Member(StaffNo));
+
+
+
+INSERT INTO 
+Potential_Buyer(BuyerNumber,Buyer_Name,Buyer_Address,Min_Bedroom,Min_Bathroom,Min_reception,Family_Type,GarageRequired,Max_price)
+VALUES('A11065', 'Adekunle Ayomide', '10 Stellamaris Bristol', '2', '1', '1', 'Children', 'yes', 700);
+INSERT INTO 
+Potential_Buyer(BuyerNumber,Buyer_Name,Buyer_Address,Min_Bedroom,Min_Bathroom,Min_reception,Family_Type,GarageRequired,Max_price)
+VALUES('A11075', 'Adebisi Muhammed', 'T43 Glamorgan Treforest', '4', '2', '2', 'Children', 'yes', 950);
+INSERT INTO 
+Potential_Buyer(BuyerNumber,Buyer_Name,Buyer_Address,Min_Bedroom,Min_Bathroom,Min_reception,Family_Type,GarageRequired,Max_price)
+VALUES('A11088', 'Folami Phola', '30 Wood Road Treforest', '3', '2', '1', 'no Children', 'yes', 800);
+INSERT INTO 
+Potential_Buyer(BuyerNumber,Buyer_Name,Buyer_Address,Min_Bedroom,Min_Bathroom,Min_reception,Family_Type,GarageRequired,Max_price)
+VALUES('A11092', 'Emmanuel Fintch', '40 Nepa Swansea', '5', '3', '2', 'Children', 'yes', 1050);
+INSERT INTO 
+Potential_Buyer(BuyerNumber,Buyer_Name,Buyer_Address,Min_Bedroom,Min_Bathroom,Min_reception,Family_Type,GarageRequired,Max_price)
+VALUES('A11096', 'Deji USman', 'N13 Glamorgan Treforest', '3', '1', '1', 'no Children', 'yes', 750);
+INSERT INTO 
+Potential_Buyer(BuyerNumber,Buyer_Name,Buyer_Address,Min_Bedroom,Min_Bathroom,Min_reception,Family_Type,GarageRequired,Max_price)
+VALUES('A11083', 'Sorewei Evelyn', 'P12 Glamorgan Pontypridd', '2', '1', '1', 'no Children', 'no', 600);
+INSERT INTO 
+Potential_Buyer(BuyerNumber,Buyer_Name,Buyer_Address,Min_Bedroom,Min_Bathroom,Min_reception,Family_Type,GarageRequired,Max_price)
+VALUES('A11066', 'Dantata Haliyah', '15 Justin Avonmouth', '2', '1', '1', 'Children', 'yes', 500);
+INSERT INTO 
+Potential_Buyer(BuyerNumber,Buyer_Name,Buyer_Address,Min_Bedroom,Min_Bathroom,Min_reception,Family_Type,GarageRequired,Max_price)
+VALUES('A11072', 'Christian Madu', 'T03 Savanna Bridgend', '4', '1', '2', 'Children', 'yes', 1000);
+INSERT INTO 
+Potential_Buyer(BuyerNumber,Buyer_Name,Buyer_Address,Min_Bedroom,Min_Bathroom,Min_reception,Family_Type,GarageRequired,Max_price)
+VALUES('A11089', 'Olaniyan Sodiq', '33 Salt Road Aberdare', '3', '2', '1', 'no Children', 'yes', 700);
+INSERT INTO 
+Potential_Buyer(BuyerNumber,Buyer_Name,Buyer_Address,Min_Bedroom,Min_Bathroom,Min_reception,Family_Type,GarageRequired,Max_price)
+VALUES('A11091', 'Aliko musa', '19 Brick Blackwood', '4', '3', '2', 'Children', 'yes', 950);
+INSERT INTO 
+Potential_Buyer(BuyerNumber,Buyer_Name,Buyer_Address,Min_Bedroom,Min_Bathroom,Min_reception,Family_Type,GarageRequired,Max_price)
+VALUES('A11095', 'Amoo Temitayo', 'N18 Glamorgan Carthys', '3', '1', '1', 'no Children', 'yes', 750);
+INSERT INTO 
+Potential_Buyer(BuyerNumber,Buyer_Name,Buyer_Address,Min_Bedroom,Min_Bathroom,Min_reception,Family_Type,GarageRequired,Max_price)
+VALUES('A11081', 'Madu Dantata', 'S02 Glamorgan Cardiff', '2', '1', '1', 'no Children', 'no', 600);
+
+
+
+
+
+INSERT INTO
+Seller(SellerNo,Property_Status)
+VALUES ('SP1004','Null');
+INSERT INTO
+Seller(SellerNo,Property_Status)
+VALUES('SP1006', 'Null');
+INSERT INTO
+Seller(SellerNo,Property_Status)
+VALUES('SP1007', 'Null');
+INSERT INTO
+Seller(SellerNo,Property_Status)
+VALUES('SP1008', 'sold');
+INSERT INTO
+Seller(SellerNo,Property_Status)
+VALUES('SP1010', 'Null');
+INSERT INTO
+Seller(SellerNo,Property_Status)
+VALUES('SP1012', 'Sold');
+INSERT INTO
+Seller(SellerNo,Property_Status)
+VALUES ('SP1009','Null');
+INSERT INTO
+Seller(SellerNo,Property_Status)
+VALUES('SP1014', 'Null');
+INSERT INTO
+Seller(SellerNo,Property_Status)
+VALUES('SP1026', 'Null');
+INSERT INTO
+Seller(SellerNo,Property_Status)
+VALUES('SP1032', 'sold');
+INSERT INTO
+Seller(SellerNo,Property_Status)
+VALUES('SP1047', 'Null');
+INSERT INTO
+Seller(SellerNo,Property_Status)
+VALUES('SP1038', 'Sold');
+
+
+
+
+INSERT INTO
+Staff_Member(StaffNo,Staff_name,Staff_address)
+VALUES('M0012','Bill Clinton','T3 Simpson aberdare');
+INSERT INTO
+Staff_Member(StaffNo,Staff_name,Staff_address)
+VALUES('M0010','Sean Jane','N0 10 Cornerstone Swansea');
+INSERT INTO
+Staff_Member(StaffNo,Staff_name,Staff_address)
+VALUES('M0008','Nanu Osberg','3 Onward Carthys');
+INSERT INTO
+Staff_Member(StaffNo,Staff_name,Staff_address)
+VALUES('M0007','Free Bossman','16 Treewood Avonmouth');
+INSERT INTO
+Staff_Member(StaffNo,Staff_name,Staff_address)
+VALUES('M0014','Lisa Laura','4 Moonnight Pontypridd');
+INSERT INTO
+Staff_Member(StaffNo,Staff_name,Staff_address)
+VALUES('M0016','Ben Bruce','15 Wood Road Cardiff');
+INSERT INTO
+Staff_Member(StaffNo,Staff_name,Staff_address)
+VALUES('M0013','Freeman Wood','M2 Gaps Pontypridd');
+INSERT INTO
+Staff_Member(StaffNo,Staff_name,Staff_address)
+VALUES('M0019','Qing Ma','N0 12 Bath Swansea');
+INSERT INTO
+Staff_Member(StaffNo,Staff_name,Staff_address)
+VALUES('M0028','Jeremih Fust','4 Ward Cardiff');
+INSERT INTO
+Staff_Member(StaffNo,Staff_name,Staff_address)
+VALUES('M0057','David Mane','18 Becks Blackwood');
+INSERT INTO
+Staff_Member(StaffNo,Staff_name,Staff_address)
+VALUES('M0044','Brooke Sandra','2 Lidnight Porth');
+INSERT INTO
+Staff_Member(StaffNo,Staff_name,Staff_address)
+VALUES('M0036','Ming Lee','11 Member Cardiff');
+
+INSERT INTO
+Sale_Property(PropertyCode,SellerNo,Area,Address,Bedroom_Number,Bathroom_Number,Reception_Number,Garage_Status,Property_Type,Price,Property_Ownership,Market_Date,Property_Current_State)
+VALUES('PC10063','SP1004','Pontypridd','M10 Wood Road','4','2','1','Yes','Detached',950,'freehold','03-JUN-2022','Unsold');
+INSERT INTO
+Sale_Property(PropertyCode,SellerNo,Area,Address,Bedroom_Number,Bathroom_Number,Reception_Number,Garage_Status,Property_Type,Price,Property_Ownership,Market_Date,Property_Current_State)
+VALUES('PC10065','SP1010','Pontypridd','Y5 Bucketty','3','2','1','Yes','Terrace',800,'leasehold','15-MAY-2022','Unsold');
+INSERT INTO
+Sale_Property(PropertyCode,SellerNo,Area,Address,Bedroom_Number,Bathroom_Number,Reception_Number,Garage_Status,Property_Type,Price,Property_Ownership,Market_Date,Property_Current_State)
+VALUES('PC10058','SP1006','Swansea','No15 Forest Groove','5','2','2','Yes','Semi-Detached',1100,'freehold','20-APR-2022','Unsold');
+INSERT INTO
+Sale_Property(PropertyCode,SellerNo,Area,Address,Bedroom_Number,Bathroom_Number,Reception_Number,Garage_Status,Property_Type,Price,Property_Ownership,Market_Date,Property_Current_State)
+VALUES('PC10048','SP1012','Cardiff','T16 Morgan Base','3','1','1','Yes','Link',750,'freehold','15-JAN-2022','Sold');
+INSERT INTO
+Sale_Property(PropertyCode,SellerNo,Area,Address,Bedroom_Number,Bathroom_Number,Reception_Number,Garage_Status,Property_Type,Price,Property_Ownership,Market_Date,Property_Current_State)
+VALUES('PC10043','SP1007','Newport','Memorial Road','2','1','1','No','Terrace',650,'freehold','03-MAR-2022','Unsold');
+INSERT INTO
+Sale_Property(PropertyCode,SellerNo,Area,Address,Bedroom_Number,Bathroom_Number,Reception_Number,Garage_Status,Property_Type,Price,Property_Ownership,Market_Date,Property_Current_State)
+VALUES('PC10052','SP1008','Bridgend','Old Legacy Road','4','2','1','Yes','Semi-Detached',950,'leasehold','10-FEB-2022','Sold');
+INSERT INTO
+Sale_Property(PropertyCode,SellerNo,Area,Address,Bedroom_Number,Bathroom_Number,Reception_Number,Garage_Status,Property_Type,Price,Property_Ownership,Market_Date,Property_Current_State)
+VALUES('PC10081','SP1009','Pontypridd','M10 Farm Road','4','2','1','Yes','Detached',930,'freehold','16-JUN-2022','Unsold');
+INSERT INTO
+Sale_Property(PropertyCode,SellerNo,Area,Address,Bedroom_Number,Bathroom_Number,Reception_Number,Garage_Status,Property_Type,Price,Property_Ownership,Market_Date,Property_Current_State)
+VALUES('PC10028','SP1014','Pontypridd','T9 SPacetown','3','2','1','Yes','Terrace',850,'leasehold','18-MAY-2022','Unsold');
+INSERT INTO
+Sale_Property(PropertyCode,SellerNo,Area,Address,Bedroom_Number,Bathroom_Number,Reception_Number,Garage_Status,Property_Type,Price,Property_Ownership,Market_Date,Property_Current_State)
+VALUES('PC10015','SP1026','Swansea','No25 Church Street','6','3','2','Yes','Semi-Detached',1200,'freehold','19-APR-2022','Unsold');
+INSERT INTO
+Sale_Property(PropertyCode,SellerNo,Area,Address,Bedroom_Number,Bathroom_Number,Reception_Number,Garage_Status,Property_Type,Price,Property_Ownership,Market_Date,Property_Current_State)
+VALUES('PC10029','SP1032','Cardiff','W12 Baseline','4','2','1','Yes','Link',850,'freehold','13-JAN-2022','Sold');
+INSERT INTO
+Sale_Property(PropertyCode,SellerNo,Area,Address,Bedroom_Number,Bathroom_Number,Reception_Number,Garage_Status,Property_Type,Price,Property_Ownership,Market_Date,Property_Current_State)
+VALUES('PC10093','SP1047','Newport','Phil Simp Road','2','1','1','No','Terrace',660,'freehold','07-MAR-2022','Unsold');
+INSERT INTO
+Sale_Property(PropertyCode,SellerNo,Area,Address,Bedroom_Number,Bathroom_Number,Reception_Number,Garage_Status,Property_Type,Price,Property_Ownership,Market_Date,Property_Current_State)
+VALUES('PC10075','SP1038','Bridgend','New Waterland Road','4','2','1','Yes','Semi-Detached',900,'leasehold','13-FEB-2022','Sold');
+
+
+
+
+
+INSERT INTO
+Viewing_Appointment(AppointmentNo,BuyerNumber,PropertyCode,StaffNo,AppointmentDate,Appointmenttime)
+VALUES('NP1006','A11065','PC10063','M0012','06-JAN-2023','12:00');
+INSERT INTO
+Viewing_Appointment(AppointmentNo,BuyerNumber,PropertyCode,StaffNo,AppointmentDate,Appointmenttime)
+VALUES('NP1008','A11075','PC10065','M0010','28-NOV-2022','14:00');
+INSERT INTO
+Viewing_Appointment(AppointmentNo,BuyerNumber,PropertyCode,StaffNo,AppointmentDate,Appointmenttime)
+VALUES('NP1010','A11088','PC10058','M0008','04-DEC-2022','15:00');
+INSERT INTO
+Viewing_Appointment(AppointmentNo,BuyerNumber,PropertyCode,StaffNo,AppointmentDate,Appointmenttime)
+VALUES('NP1012','A11092','PC10048','M0007','15-NOV-2022','12:00');
+INSERT INTO
+Viewing_Appointment(AppointmentNo,BuyerNumber,PropertyCode,StaffNo,AppointmentDate,Appointmenttime)
+VALUES('NP1023','A11096','PC10043','M0014','20-DEC-2022','10:00');
+INSERT INTO
+Viewing_Appointment(AppointmentNo,BuyerNumber,PropertyCode,StaffNo,AppointmentDate,Appointmenttime)
+VALUES('NP1014','A11083','PC10052','M0016','12-NOV-2022','09:30');
+INSERT INTO
+Viewing_Appointment(AppointmentNo,BuyerNumber,PropertyCode,StaffNo,AppointmentDate,Appointmenttime)
+VALUES('NP1009','A11066','PC10081','M0013','02-DEc-2022','13:00');
+INSERT INTO
+Viewing_Appointment(AppointmentNo,BuyerNumber,PropertyCode,StaffNo,AppointmentDate,Appointmenttime)
+VALUES('NP1011','A11072','PC10028','M0019','04-JAN-2023','12:00');
+INSERT INTO
+Viewing_Appointment(AppointmentNo,BuyerNumber,PropertyCode,StaffNo,AppointmentDate,Appointmenttime)
+VALUES('NP1013','A11089','PC10015','M0028','07-DEC-2022','10:00');
+INSERT INTO
+Viewing_Appointment(AppointmentNo,BuyerNumber,PropertyCode,StaffNo,AppointmentDate,Appointmenttime)
+VALUES('NP1041','A11091','PC10029','M0057','13-NOV-2022','12:00');
+INSERT INTO
+Viewing_Appointment(AppointmentNo,BuyerNumber,PropertyCode,StaffNo,AppointmentDate,Appointmenttime)
+VALUES('NP1032','A11095','PC10093','M0044','28-NOV-2022','15:00');
+INSERT INTO
+Viewing_Appointment(AppointmentNo,BuyerNumber,PropertyCode,StaffNo,AppointmentDate,Appointmenttime)
+VALUES('NP1033','A11081','PC10075','M0036','08-NOV-2022','10:30');
+
+SELECT *
+FROM Potential_Buyer;
+
+SELECT *
+FROM Seller;
+
+SELECT *
+FROM Staff_Member;
+
+SELECT *
+FROM Sale_Property;
+
+SELECT *
+FROM Viewing_Appointment;
+
+
+
+
+
+
+SELECT PropertyCode,SellerNo,Area,Address,Bedroom_Number,Bathroom_Number,Reception_Number,Garage_Status,Property_Type,Price,Property_Ownership,Market_Date,Property_Current_State
+FROM Sale_Property
+WHERE Area IN ('Pontypridd');
+
+
+SELECT PropertyCode,SellerNo,Area,Address,Bedroom_Number,Bathroom_Number,Reception_Number,Garage_Status,Property_Type,Price,Property_Ownership,Market_Date,Property_Current_State
+FROM Sale_Property
+WHERE Property_Type IN ('Semi-Detached')
+AND Property_Current_State IN ('Sold');
+
+SELECT Property_Type AS Type,COUNT(Property_Current_State) AS Number_Sold
+FROM Sale_Property
+WHERE Property_Current_State IN ('Sold')
+GROUP BY Property_Type,Property_Current_State;
+
+
+SELECT MAX(Price) AS Most_Expensive, MIN(Price) AS Least_Expensive
+FROM Sale_Property;
+
+SELECT *
+FROM Sale_Property
+WHERE Price IN (SELECT MAX(Price) FROM Sale_Property)
+OR Price IN(SELECT MIN(Price) FROM Sale_Property);
+
+
+SELECT PropertyCode,SellerNo,Area,Address,Bedroom_Number,Bathroom_Number,Reception_Number,Garage_Status,Property_Type,Price,Property_Ownership,Market_Date,Property_Current_State
+FROM Sale_Property
+WHERE Bedroom_Number >=3 AND Bathroom_Number >=1
+AND Garage_Status IN ('Yes');
+
+
+SELECT *
+FROM Sale_Property
+WHERE  Market_Date BETWEEN '01-JAN-2022' AND '28-FEB-2022';
+
+
+SELECT  Property_Type,MAX(Price) AS Most_Expensive, MIN(Price) AS Least_Expensive
+FROM Sale_Property
+GROUP BY Property_Type;
+
+SELECT V. AppointmentNo,V. BuyerNumber,V. PropertyCode,V. AppointmentDate,V. Appointmenttime, 'Supervised By',S. Staff_name, V. StaffNo
+FROM Viewing_Appointment V, Staff_Member S
+WHERE V. StaffNo   = S. StaffNo AND S. Staff_name = 'Lisa Laura'; 
+
+
+
+
+ALTER TABLE Seller
+ADD SellerName VARCHAR(20);
+update Seller
+set SellerName='A. Fella'
+where SellerNo='SP1006';
+update Seller
+set SellerName= 'C. Bams'
+Where SellerNo='SP1004';
+Update Seller
+set SellerName='P. Morgan'
+Where SellerNo='SP1007';
+update Seller
+set SellerName='F. Allen'
+Where SellerNo='SP1008';
+update Seller
+set SellerName='M. Felix'
+Where SellerNo='SP1010';
+update Seller
+set SellerName='Sam Chang'
+Where SellerNo='SP1012';
+update Seller
+set SellerName='D. Perez'
+Where SellerNo='SP1009';
+update Seller
+set SellerName= 'J. Evans'
+Where SellerNo='SP1014';
+update Seller
+set SellerName= 'M. Bench'
+Where SellerNo='SP1026';
+update Seller
+set SellerName='F. George'
+Where SellerNo='SP1032';
+update Seller
+set SellerName= 'M. Brain'
+Where SellerNo='SP1047';
+update Seller
+set SellerName='F. Hughes'
+Where SellerNo='SP1038';
+
+SELECT *
+FROM Seller;
+
+
+
+SELECT V. AppointmentNo,V. BuyerNumber,V. PropertyCode,P. Buyer_Name AS PotentialBuyer,M. SellerName,L. Address AS Property_Address,S. Staff_name,V. AppointmentDate,V. Appointmenttime
+FROM Viewing_Appointment V, Potential_Buyer P, Sale_Property L, Staff_Member S,Seller M
+WHERE V. StaffNo   = S. StaffNo AND M. SellerNo = L. SellerNo AND V. BuyerNumber = P. BuyerNumber AND L. PropertyCode = V. PropertyCode ;
+
+
